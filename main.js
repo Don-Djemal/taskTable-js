@@ -18,7 +18,7 @@ function addTask(text) {
     tableTask.push(task);
 };
 
-function deleteTask(id) {
+function changeId(id) {
     tableTask.forEach(task => {
         if (task.id === id) {
            task.done = !task.done;
@@ -29,7 +29,6 @@ function deleteTask(id) {
 
 
 function showTableTask() {
-    // console.log(tableTask);
     let html = '';
     tableTask.forEach(task => {
         if (task.done) {
@@ -42,7 +41,7 @@ function showTableTask() {
         }else {
             html += `<div>
             ${task.text}
-            <button data-id='${task.id}'>не готова</button>
+            <button data-id='${task.id}'>${task.done? "готово": "не готово"}</button>
             <button data-delId='${task.id}'>Удалить</button>
                     </div>`;
         }
@@ -52,7 +51,7 @@ function showTableTask() {
 };
 
 
-function remove(id) {
+function removeTask(id) {
     tableTask = tableTask.filter(task => task.id !== id);
     
 };
@@ -74,19 +73,15 @@ table.addEventListener('click', (event)=> {
     }
     const id = event.target.dataset.id;
     if (!!id) {
-        deleteTask(id);
+        changeId(id);
     }else {
         let delId = event.target.dataset.delid;
-        remove(delId)
+        removeTask(delId)
     }
 
     showTableTask();
 
-
-    // console.log(event.target.dataset);
 })
-
-
 
 
 
