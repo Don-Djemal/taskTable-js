@@ -31,20 +31,11 @@ function changeId(id) {
 function showTableTask() {
     let html = '';
     tableTask.forEach(task => {
-        if (task.done) {
-            html += `<div>
-            ${task.text}
-            <button data-id='${task.id}'>готова</button>
-            <button data-delId='${task.id}'>Удалить</button>
-                    </div>`;
-
-        }else {
             html += `<div>
             ${task.text}
             <button data-id='${task.id}'>${task.done? "готово": "не готово"}</button>
             <button data-delId='${task.id}'>Удалить</button>
                     </div>`;
-        }
     })
 
     table.innerHTML = html;
