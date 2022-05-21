@@ -1,7 +1,7 @@
 const table = document.querySelector('.TaskTable');
 const inputTask = document.querySelector('.TaskInput');
-const btnTask = document.querySelector('.btnAddTask');
-
+const btnAddTask = document.querySelector('.btnAddTask');
+const btnClear = document.querySelector('.btn-clear');
 
 
 let tableTask = [];
@@ -18,7 +18,7 @@ function addTask(text) {
     tableTask.push(task);
 };
 
-function changeId(id) {
+function changeСompleteStatus(id) {
     tableTask.forEach(task => {
         if (task.id === id) {
            task.done = !task.done;
@@ -26,7 +26,10 @@ function changeId(id) {
     })
 };
 
-
+function clearTable() {
+    tableTask.length = 0;
+    showTableTask();
+};
 
 function showTableTask() {
     let html = '';
@@ -48,7 +51,7 @@ function removeTask(id) {
 };
 
 
-btnTask.addEventListener('click', () =>{
+btnAddTask.addEventListener('click', () =>{
     const text = inputTask.value;
 
     addTask(text);
@@ -58,13 +61,15 @@ btnTask.addEventListener('click', () =>{
 
 
 
+
+
 table.addEventListener('click', (event)=> {
     if (event.target.tagName !== 'BUTTON') {
         return;
     }
     const id = event.target.dataset.id;
     if (!!id) {
-        changeId(id);
+        changeСompleteStatus(id);
     }else {
         let delId = event.target.dataset.delid;
         removeTask(delId)
@@ -72,7 +77,7 @@ table.addEventListener('click', (event)=> {
 
     showTableTask();
 
-})
+});
 
 
 
